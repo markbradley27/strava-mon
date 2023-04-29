@@ -1,0 +1,37 @@
+{
+  "name": "strava-mon",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.6.0",
+    "@types/express": "^4.17.17",
+    "@types/pg": "^8.6.6",
+    "@types/request": "^2.48.8",
+    "@types/simple-oauth2": "^5.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "build": "npm-run-all clean tsc",
+    "clean": "rimraf dist",
+    "dev": "nodemon --watch src -e ts --exec npm-run-all build start",
+    "dev:debug": "nodemon --watch src -e ts --exec npm-run-all build start:debug",
+    "gen:strava-client": "openapi-generator-cli generate -i https://developers.strava.com/swagger/swagger.json -g typescript-node --skip-validate-spec -o ./src/strava-client",
+    "start": "node .",
+    "start:debug": "DEBUG=* node .",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-strava": "^1.0.2",
+    "pg": "^8.10.0",
+    "request": "^2.88.2"
+  }
+}
