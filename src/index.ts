@@ -4,7 +4,7 @@ import StravaLayer from "./strava_layer";
 import DataLayer from "./data_layer";
 import webhook_handlers from "./handlers/webhook_handlers";
 import auth_handlers from "./handlers/auth_handlers";
-import OauthLayer from "./oauth_client";
+import OauthLayer from "./oauth_layer";
 
 dotenv.config();
 

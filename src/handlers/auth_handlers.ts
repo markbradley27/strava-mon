@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import express from "express";
 import DataLayer from "../data_layer";
-import OauthLayer from "../oauth_client";
+import OauthLayer from "../oauth_layer";
 import StravaLayer from "../strava_layer";
 
 export default function auth_handlers(

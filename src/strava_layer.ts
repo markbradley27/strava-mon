@@ -1,6 +1,6 @@
 import DataLayer from "./data_layer";
 import { ActivitiesApi, DetailedActivity } from "./strava-client/api";
-import OauthLayer from "./oauth_client";
+import OauthLayer from "./oauth_layer";
 
 export default class StravaLayer {
   private dl: DataLayer;
