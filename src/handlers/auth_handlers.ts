@@ -11,10 +11,12 @@ export default function auth_handlers(
 ) {
   const router = express.Router();
 
-  router.get("/authorize", (_req: express.Request, res: express.Response) => {
+  router.get("/authorize", (req: express.Request, res: express.Response) => {
+    // eslint-disable-next-line prettier/prettier
+    const redirect_uri = `${req.protocol}://${req.hostname}:${process.env.PORT ?? ""}${req.originalUrl}_callback`;
     res.redirect(
       oa.authorizeURL({
-        redirect_uri: process.env.STRAVA_REDIRECT_URI,
+        redirect_uri,
         scope: "activity:read_all",
       })
     );

@@ -1,0 +1,30 @@
+name: strava-mon
+services:
+  postgres:
+    image: "postgres:14-alpine"
+    environment:
+      POSTGRES_USER: strava-mon
+      POSTGRES_PASSWORD: strava-mon
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strava-mon"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - type: bind
+        source: ./init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+  app:
+    build: .
+    ports:
+      - '${PORT}:${PORT}'
+    env_file:
+      - ./.env
+    environment:
+      PGHOST: postgres
+      PGDATABASE: strava-mon
+      PGUSER: strava-mon
+      PGPASSWORD: strava-mon
+    depends_on:
+      postgres:
+        condition: service_healthy

@@ -32,6 +32,7 @@
     "express-async-handler": "^1.2.0",
     "express-strava": "^1.0.2",
     "pg": "^8.10.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "simple-oauth2": "github:markbradley27/simple-oauth2"
   }
 }
