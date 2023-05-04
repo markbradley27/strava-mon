@@ -1,0 +1,12 @@
+.root {
+  height: 100%;
+  display: flex;
+}
+
+dashboard-sidebar {
+  flex: 1 1 0%;
+}
+
+dashboard-map {
+  flex: 5 1 0%;
+}
