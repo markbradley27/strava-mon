@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { DetailedActivity } from '../../../../../server/src/strava-client/model/models';
 
 @Component({
   selector: 'dashboard-map',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent {
-
+  @Input() activities: DetailedActivity[] = [];
 }

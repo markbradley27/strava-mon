@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DetailedActivity } from '../../../../../server/src/strava-client/model/detailedActivity';
+import { ActivitiesService } from '../activities.service';
 
 @Component({
   selector: 'dashboard-root',
@@ -6,5 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./root.component.scss']
 })
 export class RootComponent {
+  activities: DetailedActivity[] = []
 
+  constructor(private activitiesService: ActivitiesService) { }
+
+  getActivities() {
+    this.activitiesService.getActivities().subscribe((activities) => {
+      this.activities = activities;
+      console.log("activities:", this.activities);
+    });
+  }
+
+  ngOnInit() {
+    this.getActivities();
+  }
 }
