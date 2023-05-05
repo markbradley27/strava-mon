@@ -18,7 +18,7 @@ const sl = new StravaLayer(dl, oa);
 app.use("/webhook", webhook_handlers(dl, sl));
 app.use("/auth", auth_handlers(dl, oa, sl));
 
-const port = process.env.PORT;
+const port = process.env.WEBHOOK_PORT;
 app.listen(port, () => {
   console.log(`Listening on port: ${port ?? ""}`);
 });

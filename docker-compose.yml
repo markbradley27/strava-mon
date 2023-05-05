@@ -18,7 +18,7 @@ services:
   server:
     build: ./server
     ports:
-      - '${PORT}:${PORT}'
+      - '${WEBHOOK_PORT}:${WEBHOOK_PORT}'
     env_file:
       - ./.env
     environment:
@@ -26,6 +26,18 @@ services:
       PGDATABASE: strava-mon
       PGUSER: strava-mon
       PGPASSWORD: strava-mon
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgrest:
+    image: postgrest/postgrest
+    ports:
+      - '${POSTGREST_PORT}:3000'
+    environment:
+      PGRST_DB_URI: postgres://strava-mon:strava-mon@postgres:5432/strava-mon
+      PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3000
+      # TODO: Use a read-only user.
+      PGRST_DB_ANON_ROLE: strava-mon
     depends_on:
       postgres:
         condition: service_healthy
