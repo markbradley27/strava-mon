@@ -15,7 +15,6 @@ export class RootComponent {
   getActivities() {
     this.activitiesService.getActivities().subscribe((activities) => {
       this.activities = activities;
-      console.log("activities:", this.activities);
     });
   }
 

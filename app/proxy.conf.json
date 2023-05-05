@@ -1,6 +1,9 @@
 {
-  "/activities": {
+  "/postgrest": {
     "target": "http://localhost:8081",
-    "secure": false
+    "secure": false,
+    "pathRewrite": {
+      "^/postgrest": ""
+    }
   }
 }
