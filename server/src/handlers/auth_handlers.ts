@@ -13,7 +13,7 @@ export default function auth_handlers(
 
   router.get("/authorize", (req: express.Request, res: express.Response) => {
     // eslint-disable-next-line prettier/prettier
-    const redirect_uri = `${req.protocol}://${req.hostname}:${process.env.PORT ?? ""}${req.originalUrl}_callback`;
+    const redirect_uri = `${req.protocol}://${req.hostname}:${process.env.WEBHOOK_PORT ?? ""}${req.originalUrl}_callback`;
     res.redirect(
       oa.authorizeURL({
         redirect_uri,
@@ -31,7 +31,7 @@ export default function auth_handlers(
           redirect_uri: "",
         });
         await dl.insertUser(token);
-        void sl.loadAllActivities();
+        sl.syncAllActivities().catch(console.log);
         res.sendStatus(200);
       } catch (error: unknown) {
         console.log(`authorize_callback error: ${(error as Error).message}`);
@@ -39,6 +39,11 @@ export default function auth_handlers(
       }
     })
   );
+
+  router.get("/sync", (_req: express.Request, res: express.Response) => {
+    sl.syncAllActivities().catch(console.log);
+    res.sendStatus(200);
+  });
 
   router.get(
     "/deauthorize",

@@ -125,7 +125,7 @@ export default class StravaLayer {
     await this.loadActivity(id);
   }
 
-  async loadAllActivities() {
+  async syncAllActivities() {
     let page = 0;
     let activity_summaries: SummaryActivity[];
     do {
@@ -144,6 +144,15 @@ export default class StravaLayer {
 
       for (const activity_summary of activity_summaries) {
         const id = Number(activity_summary.id);
+
+        if ((await this.dl.getActivity(id)) !== undefined) {
+          console.log(
+            `Skipping activity already in db; id: ${id}, name: ${activity_summary.name ?? "undefined"
+            }`
+          );
+          continue;
+        }
+
         console.log(
           // eslint-disable-next-line prettier/prettier
           `Fetching activity; id: ${id}, name: ${activity_summary.name ?? "undefined"

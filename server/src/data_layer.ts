@@ -54,6 +54,17 @@ export default class DataLayer {
     await this.db.query("DELETE FROM users");
   }
 
+  async getActivity(id: number) {
+    const res = await this.db.query<{ activity: DetailedActivity }>(
+      "SELECT activity FROM activities WHERE activity->'id'=$1",
+      [`${id}`]
+    );
+    if (res.rows.length === 0) {
+      return undefined;
+    }
+    return res.rows[0].activity;
+  }
+
   async insertActivity(activity: DetailedActivity) {
     await this.db.query("INSERT INTO activities (activity) VALUES ($1)", [
       activity,
