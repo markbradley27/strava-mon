@@ -9,15 +9,15 @@ import DataLayer from "../data_layer";
 
 export default function webhook_handlers(dl: DataLayer, sl: StravaLayer) {
   function activity_create_handler(data: ActivityCreateData) {
-    void sl.loadActivity(data.object_id);
+    sl.loadActivity(data.object_id).catch(console.log);
   }
 
   function activity_update_handler(data: ActivityUpdateData) {
-    void sl.reloadActivity(data.object_id);
+    sl.reloadActivity(data.object_id).catch(console.log);
   }
 
   function activity_delete_handler(data: ActivityDeleteData) {
-    void dl.deleteActivity(data.object_id);
+    dl.deleteActivity(data.object_id).catch(console.log);
   }
 
   return StravaHandlers({
