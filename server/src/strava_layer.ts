@@ -147,6 +147,7 @@ export default class StravaLayer {
 
         if ((await this.dl.getActivity(id)) !== undefined) {
           console.log(
+            // eslint-disable-next-line prettier/prettier
             `Skipping activity already in db; id: ${id}, name: ${activity_summary.name ?? "undefined"
             }`
           );
