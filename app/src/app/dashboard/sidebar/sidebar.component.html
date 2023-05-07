@@ -1,2 +1,13 @@
-<p>sidebar works!</p>
-<p>{{activityTypes}}</p>
+<div class="root">
+  <mat-form-field appearance="fill">
+    <mat-label>Activity Types</mat-label>
+    <mat-select
+      [ngModel]="_selectedActivityTypes"
+      (ngModelChange)="selectedActivityTypes.emit($event)"
+      multiple>
+      <mat-option *ngFor="let activityType of activityTypes"
+        [value]="activityType">{{activityType}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  {{_selectedActivityTypes}}
+</div>

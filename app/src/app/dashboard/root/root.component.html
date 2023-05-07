@@ -1,4 +1,4 @@
 <div class="root">
-  <dashboard-sidebar />
+  <dashboard-sidebar (selectedActivityTypes)="updateActivityTypesFilter($event)"/>
   <dashboard-map [activities]="activities" />
 </div>

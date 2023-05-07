@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 // TODO: Think about moving this out of server.
@@ -20,7 +20,15 @@ export class ActivitiesService {
     return this.http.get<{ type: ActivityType }[]>("/postgrest/activity_types").pipe(map((rows) => rows.map((row) => row.type)));
   }
 
-  getActivities() {
-    return this.http.get<ActivityRow[]>("/postgrest/activities").pipe(map((rows) => rows.map((row) => row.activity)));
+  getActivities(options?: {
+    types?: ActivityType[]
+  }) {
+    let params = new HttpParams();
+
+    if (options?.types !== undefined && options.types.length > 0) {
+      params = params.set("activity->>type", `in.(${options.types.map((type) => `${type}`).join(",")})`);
+    }
+
+    return this.http.get<ActivityRow[]>("/postgrest/activities", { params: params }).pipe(map((rows) => rows.map((row) => row.activity)));
   }
 }

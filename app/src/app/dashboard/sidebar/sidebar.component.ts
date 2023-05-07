@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivityType } from '../../../../../server/src/strava-client/model/activityType';
 import { ActivitiesService } from '../activities.service';
 
@@ -9,6 +10,11 @@ import { ActivitiesService } from '../activities.service';
 })
 export class SidebarComponent {
   activityTypes: ActivityType[] = [];
+
+  // TODO: I'm declaring this empty array just to define the type of the
+  // ngModel, there's got to be a better way...
+  _selectedActivityTypes: ActivityType[] = [];
+  @Output() selectedActivityTypes = new EventEmitter<ActivityType[]>();
 
   constructor(private activitiesService: ActivitiesService) { }
 

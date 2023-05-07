@@ -1,2 +1,4 @@
-<p>map works!</p>
-<p>{{activities | json}}</p>
+<h1>Selected activities:</h1>
+<div *ngFor="let activity of activities">
+  {{activity.name}}: {{activity.type}}
+</div>
