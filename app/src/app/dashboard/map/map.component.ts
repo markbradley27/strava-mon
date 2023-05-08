@@ -4,7 +4,7 @@ import { DetailedActivity } from '../../../../../server/src/strava-client/model/
 @Component({
   selector: 'dashboard-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss'],
 })
 export class MapComponent {
   @Input() activities: DetailedActivity[] = [];

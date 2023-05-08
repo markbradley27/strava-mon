@@ -10,14 +10,12 @@ import { GoogleMapComponent } from './google-map/google-map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
-
-
 @NgModule({
   declarations: [
     SidebarComponent,
     RootComponent,
     MapComponent,
-    GoogleMapComponent
+    GoogleMapComponent,
   ],
   imports: [
     CommonModule,
@@ -28,8 +26,6 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     HttpClientJsonpModule,
   ],
-  exports: [
-    RootComponent
-  ]
+  exports: [RootComponent],
 })
-export class DashboardModule { }
+export class DashboardModule {}
